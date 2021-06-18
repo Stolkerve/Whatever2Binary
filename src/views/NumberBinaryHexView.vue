@@ -6,8 +6,8 @@
 			:outputPlaceHolder="'011001010111'"
 			:inputText="'Number'"
 			:outputText="'Binary'"
-			:converterFunc1="stringToBinary"
-			:converterFunc2="binaryToString"
+			:converterFunc1="stringToNumber"
+			:converterFunc2="binaryToNumber"
 			:inputFilterRegex1="/[a-zA-Z]/g"
 			:inputFilterRegex2="/[a-zA-Z2-9]/g"
 		/>
@@ -30,8 +30,8 @@
 			:outputPlaceHolder="'011001010111'"
 			:inputText="'Hexadecimal'"
 			:outputText="'Binary'"
-			:converterFunc1="stringToBinary"
-			:converterFunc2="binaryToString"
+			:converterFunc1="hexToBinary"
+			:converterFunc2="binaryToHex"
 			:inputFilterRegex1="/[g-zG-Z]/g"
 			:inputFilterRegex2="/[a-zA-Z2-9]/g"
 		/>
@@ -50,7 +50,7 @@ import ConvertFormComponent from "@/components/ConvertFormComponent.vue"
 
 export default class NumberBinaryHexView extends Vue {
 
-	binaryToString(src:string): string {
+	binaryToNumber(src:string): string {
 		var buffer = "";
 		var numOfChars = src.length / 8;
 		for(let i = numOfChars; i > 0; i--)
@@ -65,7 +65,7 @@ export default class NumberBinaryHexView extends Vue {
 		return buffer;
 	}
 
-	stringToBinary(src:string): string {
+	stringToNumber(src:string): string {
 		var buffer = "";
 	  for(let i = 0; i < src.length; i++)
 	  {
@@ -78,11 +78,19 @@ export default class NumberBinaryHexView extends Vue {
 	}
 
 	numberToHex(src:string): string {
-  return Number(src).toString(16).toUpperCase();
-}
+  	return src != "" ? Number(src).toString(16).toUpperCase() : "";
+	}
 
 	hexToNumber(src:string): string {
-		return parseInt(src, 16).toString();
+		return src != "" ? parseInt(src, 16).toString() : "";
+	}
+
+	hexToBinary(src:string): string{
+		return this.stringToNumber(this.hexToNumber(src));
+	}
+
+	binaryToHex(src:string): string{
+		return this.numberToHex(this.binaryToNumber(src));
 	}
 }
 
