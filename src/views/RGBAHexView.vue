@@ -136,7 +136,6 @@ export default class RGBAHexView extends Vue {
 
   swapForm(){
     this.swap = !this.swap;
-    console.log(this.vector.x, this.vector.y, this.vector.z, this.vector.w);
   }
 
 }
