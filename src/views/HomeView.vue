@@ -1,6 +1,11 @@
 <template>
-  <div>
-    This page do stuff :D
+  <div class = "forms-conteiner">
+    <div class="forms-background-conteiner">
+      <p>
+      This page is intended to convert text to binary, numbers to binary and hex and rgba to hex and vice versa.
+      <br/>
+      </p>
+    </div>
   </div>
 </template>
 

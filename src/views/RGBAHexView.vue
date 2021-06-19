@@ -1,61 +1,36 @@
 <template>
   <div class="forms-conteiner">
-    fix the swap
     <div class = "forms-background-conteiner">
     <template v-if="!swap">
       <div style = "width: 100%;">
         <p>RGBA</p>
       </div>
-      <!--
-      <RGBAComponent
-        :inputText="'RGBA'"
-        :outputText="'Hexadecimal'"
-        :placeHolderX="'R'"
-        :placeHolderY="'G'"
-        :placeHolderZ="'B'"
-        :placeHolderW="'A'"
-        :setVecParent="getVecToChild"
-        :setReadonly="false"
-      />
-      -->
       <div class = "rgba-conteiner">
-        <input class="x" name="x" type="text" v-on:keyup="filterInputVec" :placeholder="'x'" :maxlength="!isNormalize ? 3 : 10"/>
-        <input class="y" name="y" type="text" v-on:keyup="filterInputVec" :placeholder="'y'" :maxlength="!isNormalize ? 3 : 10"/>
-        <input class="z" name="z" type="text" v-on:keyup="filterInputVec" :placeholder="'z'" :maxlength="!isNormalize ? 3 : 10"/>
-        <input class="w" name="w" type="text" v-on:keyup="filterInputVec" :placeholder="'w'" :maxlength="!isNormalize ? 3 : 10"/>
+        <input class="x" name="x" :value="this.vector.x" type="text" v-on:keyup="filterInputVec" :placeholder="'x'" :maxlength="!isNormalize ? 3 : 10"/>
+        <input class="y" name="y" :value="this.vector.y" type="text" v-on:keyup="filterInputVec" :placeholder="'y'" :maxlength="!isNormalize ? 3 : 10"/>
+        <input class="z" name="z" :value="this.vector.z" type="text" v-on:keyup="filterInputVec" :placeholder="'z'" :maxlength="!isNormalize ? 3 : 10"/>
+        <input class="w" name="w" :value="this.vector.w" type="text" v-on:keyup="filterInputVec" :placeholder="'w'" :maxlength="!isNormalize ? 3 : 10"/>
       </div>
       <div style="display: flex; width: 100%; align-items: center; justify-content: space-between;">
         <p>Hexadecimal</p>
         <span v-on:click.prevent="swapForm"><i class="fa fa-sort"></i></span>
       </div>
-      <input class = "form-input-text" v-on:keyup="filterInput" readonly maxlength="8" type="text" placeholder="F237A" :value="vec4ToHex()"/>
+      <input class = "form-input-text" readonly maxlength="8" type="text" placeholder="F237A" :value="vec4ToHex()"/>
     </template>
     <template v-else>
       <div style = "width: 100%;">
         <p>Hexadecimal</p>
       </div>
-      <input class = "form-input-text" type="text" v-on:keyup="filterInput" maxlength="8" placeholder="F237A"/>
+      <input class = "form-input-text" type="text" :value="inputHex" :v-model="inputHex" v-on:keyup="filterInput" maxlength="8" placeholder="F237A"/>
       <div style="display: flex; width: 100%; align-items: center; justify-content: space-between;">
         <p>RGBA</p>
         <span v-on:click.prevent="swapForm"><i class="fa fa-sort"></i></span>
       </div>
-      <!--
-      <RGBAComponent
-        :inputText="'RGBA'"
-        :outputText="'Hexadecimal'"
-        :placeHolderX="'R'"
-        :placeHolderY="'G'"
-        :placeHolderZ="'B'"
-        :placeHolderW="'A'"
-        :getVecParent="setVecToChild"
-        :setReadonly="true"
-      />
-      -->
       <div class = "rgba-conteiner">
-        <input class="x" readonly :value="vector.x" type="text" :placeholder="'x'" :maxlength="!isNormalize ? 3 : 10"/>
-        <input class="y" readonly :value="vector.y" type="text" :placeholder="'y'" :maxlength="!isNormalize ? 3 : 10"/>
-        <input class="z" readonly :value="vector.z" type="text" :placeholder="'z'" :maxlength="!isNormalize ? 3 : 10"/>
-        <input class="w" readonly :value="vector.w" type="text" :placeholder="'w'" :maxlength="!isNormalize ? 3 : 10"/>
+        <input class="x" :value="this.vector.x" readonly type="text" :placeholder="'x'" :maxlength="!isNormalize ? 3 : 10"/>
+        <input class="y" :value="this.vector.y" readonly type="text" :placeholder="'y'" :maxlength="!isNormalize ? 3 : 10"/>
+        <input class="z" :value="this.vector.z" readonly type="text" :placeholder="'z'" :maxlength="!isNormalize ? 3 : 10"/>
+        <input class="w" :value="this.vector.w" readonly type="text" :placeholder="'w'" :maxlength="!isNormalize ? 3 : 10"/>
       </div>
     </template>
     </div>
@@ -70,9 +45,8 @@ import {Vec4} from "@/models/vectors"
 @Component
 export default class RGBAHexView extends Vue {
   private vector:Vec4 = {x:0, y:0, z:0, w:0};
+  private inputHex = "";
   private swap = false;
-  private inputHex!:string;
-  //private inputVec:Vec4 = {x:0, y:0, z:0, w:0};
   private isNormalize = false;
 
 
@@ -124,7 +98,9 @@ export default class RGBAHexView extends Vue {
       w === "0" ? "00" : w.length < 2 ? "0" + w : w,
     ]
 
-    return hex.join("");
+    this.inputHex = hex.join("");
+
+    return this.inputHex;
   }
 
   hexToVec4() {
@@ -133,6 +109,7 @@ export default class RGBAHexView extends Vue {
     this.vector.y = (hexInt >> 8) & 0xff;
     this.vector.z = (hexInt >> 16) & 0xff;
     this.vector.w = (hexInt >> 24) & 0xff;
+    //console.log(hexInt == 0 ? 'xd': '23')
   }
 
   swapForm(){

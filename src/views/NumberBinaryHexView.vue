@@ -53,6 +53,7 @@ import ConvertFormComponent from "@/components/ConvertFormComponent.vue"
 export default class NumberBinaryHexView extends Vue {
 
 	binaryToNumber(src:string): string {
+		/*
 		var buffer = "";
 		var numOfChars = src.length / 8;
 		for(let i = numOfChars; i > 0; i--)
@@ -64,10 +65,12 @@ export default class NumberBinaryHexView extends Vue {
 	    }
 			buffer += String.fromCharCode(parseInt(char.split("").join(""), 2));
 		}
-		return buffer;
+		*/
+		return parseInt(src.split('').join(''), 2 ).toString();
 	}
 
 	stringToNumber(src:string): string {
+		/*
 		var buffer = "";
 	  for(let i = 0; i < src.length; i++)
 	  {
@@ -77,10 +80,13 @@ export default class NumberBinaryHexView extends Vue {
 	      }
 	  }
 	  return buffer.split("").reverse().join("");
+		*/
+		return Number(src).toString(2);
 	}
 
 	numberToHex(src:string): string {
-  	return src != "" ? Number(src).toString(16).toUpperCase() : "";
+		var hex = Number(src).toString(16).toUpperCase();
+  	return src == "" ? "" : hex == "NAN" ? "" : hex;
 	}
 
 	hexToNumber(src:string): string {

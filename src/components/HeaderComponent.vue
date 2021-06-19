@@ -5,13 +5,13 @@
 			</div>
 			<div class="nav-bar">
 				<div>
-				<router-link to="/stringbinary">Go to stringbinary</router-link>
+				<router-link to="/stringbinary">text to binary</router-link>
 				</div>
 				<div>
-				<router-link to="/numberbinaryhex">Go to numberbinaryhex</router-link>
+				<router-link to="/numberbinaryhex">numbers to binary/hex</router-link>
 				</div>
 				<div>
-				<router-link to="/rgbahex">Go to rgbahex</router-link>
+				<router-link to="/rgbahex">rgba to hex</router-link>
 				</div>
 			</div>
   	</div>
@@ -26,15 +26,21 @@
 	background-color:rgb(108, 255, 179);
 	height: auto;
 	flex-direction: column;
-	box-shadow: 0 3px 5px 0 rgba(108, 255, 179, 1);
+	box-shadow: 0 3px 5px 0 rgb(73, 233, 150);
 	margin-bottom: 30px;
 }
 
 .header-title {
   /*background-color:rgb(108, 255, 179);*/
 	font-size: 40px;
-	padding-top: 5px;
-	padding-bottom: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border: solid 1px white;
+}
+
+.header-title a{
+	padding: 2px;
+	word-wrap: break-word;
 }
 /*background: linear-gradient(to bottom right,#024,#402);*/
 
@@ -47,10 +53,12 @@
 
 .nav-bar div{
 	margin: 5px;
+	border: solid 1px white;
 }
 
 .nav-bar a{
 	width: 100%;
+	padding: 2px;
 }
 
 a {

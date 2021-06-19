@@ -11,7 +11,7 @@
   width: 55%;
   background-color: cornsilk;
   padding:2.5%;
-  box-shadow: 0 3px 10px 0 cornsilk, 0 -3px 10px 0 cornsilk
+  box-shadow: 0 3px 10px 0 rgb(225, 218, 193), 0 -3px 10px 0 cornsilk
 }
 
 .fa-sort{

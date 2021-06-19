@@ -1,29 +1,30 @@
 <template>
 	<div class = "conteiner">
-		fix the swap
 		<template v-if="!swap">
 			<p>{{inputText}}</p>
 			<textarea
 				v-on:keyup="filter1"
+				v-model="input"
 				:placeholder="inputPlaceHolder"
 			/>
 			<div style="display: flex; align-items: center; justify-content: space-between;">
 				<p>{{outputText}}</p>
 				<span v-on:click.prevent="swapForm"><i class="fa fa-sort"></i></span>
 			</div>
-			<textarea class = "output" readonly :placeholder="outputPlaceHolder" :value="converterFunc1(this.input)"/>
+			<textarea class = "output" readonly :placeholder="outputPlaceHolder" :value="this.output = converterFunc1(this.input)"/>
 		</template>
 		<template v-else>
 			<p>{{outputText}}</p>
 			<textarea
 				v-on:keyup="filter2"
+				v-model="output"
 				autofocus
 				:placeholder="outputPlaceHolder"/>
 			<div style="display: flex; align-items: center; justify-content: space-between;">
 				<p>{{inputText}}</p>
 				<span v-on:click.prevent="swapForm"><i class="fa fa-sort"></i></span>
 			</div>
-			<textarea class = "output" readonly :placeholder="inputPlaceHolder" :value="converterFunc2(this.input)"/>
+			<textarea class = "output" readonly :placeholder="inputPlaceHolder" :value="this.input = converterFunc2(this.output)"/>
 		</template>
 	</div>
 </template>
@@ -57,7 +58,7 @@ export default class ConvertFormComponent extends Vue {
 		if(this.inputFilterRegex2 != undefined){
 			e.target.value = e.target.value.replace(this.inputFilterRegex2, "");
 		}
-		this.input = e.target.value
+		this.output = e.target.value
 	}
 
 	swapForm(){
