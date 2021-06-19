@@ -1,5 +1,6 @@
 <template>
   <div class="forms-conteiner">
+    fix the swap
     <div class = "forms-background-conteiner">
     <template v-if="!swap">
       <div style = "width: 100%;">
@@ -158,6 +159,7 @@ export default class RGBAHexView extends Vue {
   box-sizing: border-box;
   padding: 12px 20px;
   border: solid 1px black;
+  width: 100%;
 }
 
 .x {

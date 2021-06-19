@@ -1,6 +1,6 @@
 <template>
   <div>
-    90-
+    This page do stuff :D
   </div>
 </template>
 

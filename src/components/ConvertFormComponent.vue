@@ -1,5 +1,6 @@
 <template>
 	<div class = "conteiner">
+		fix the swap
 		<template v-if="!swap">
 			<p>{{inputText}}</p>
 			<textarea
