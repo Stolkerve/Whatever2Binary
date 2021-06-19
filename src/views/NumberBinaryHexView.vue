@@ -1,5 +1,6 @@
 <template>
   <div class="forms-conteiner">
+		<div class = "forms-background-conteiner">
 		<!-- Number-Binary -->
     <ConvertFormComponent
 			:inputPlaceHolder="'120897923'"
@@ -35,6 +36,7 @@
 			:inputFilterRegex1="/[g-zG-Z]/g"
 			:inputFilterRegex2="/[a-zA-Z2-9]/g"
 		/>
+		</div>
   </div>
 </template>
 
@@ -101,6 +103,6 @@ hr {
 	margin-top: 30px;
 	border: 2px solid black;
   border-radius: 5px;
-	width: 50%;
+	width: 100%;
 }
 </style>

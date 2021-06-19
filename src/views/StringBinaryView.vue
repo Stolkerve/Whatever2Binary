@@ -1,5 +1,6 @@
 <template>
   <div class = "forms-conteiner">
+		<div class = "forms-background-conteiner">
     <ConvertFormComponent
 			:inputPlaceHolder="'Write your ASCII text here!'"
 			:outputPlaceHolder="'0110010101110100011010010111001001010111'"
@@ -9,6 +10,7 @@
 			:converterFunc2="this.binaryToString"
 			:inputFilterRegex2="/[a-zA-Z2-9]/g"
 		/>
+		</div>
   </div> 
 </template>
 

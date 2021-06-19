@@ -67,7 +67,7 @@ export default class ConvertFormComponent extends Vue {
 
 <style scoped>
 .conteiner {
-	width: 50%;
+	width: 100%;
 	height: fit-content;
 	display: flex;
 	flex-direction: column;
@@ -96,7 +96,7 @@ export default class ConvertFormComponent extends Vue {
 	overflow-x: hidden;
 	margin: 0px;
 	border: solid 2px black;
-	box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2), 0 -3px 10px 0 rgba(0, 0, 0, 0.19);
+	box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2), 0 -3px 10px 0 rgba(0, 0, 0, 0.2);
 }
 
 </style>
