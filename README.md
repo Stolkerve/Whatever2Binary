@@ -1,4 +1,4 @@
-# text-binary-converter
+# Whatever2Binary
 
 ## Project setup
 ```
