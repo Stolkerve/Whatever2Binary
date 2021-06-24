@@ -7,7 +7,7 @@
 			:outputPlaceHolder="'011001010111'"
 			:inputText="'Number'"
 			:outputText="'Binary'"
-			:converterFunc1="stringToNumber"
+			:converterFunc1="numberToBinary"
 			:converterFunc2="binaryToNumber"
 			:inputFilterRegex1="/[a-zA-Z]/g"
 			:inputFilterRegex2="/[a-zA-Z2-9]/g"
@@ -51,50 +51,97 @@ import ConvertFormComponent from "@/components/ConvertFormComponent.vue"
 })
 
 export default class NumberBinaryHexView extends Vue {
+	private hexNumMap = new Map<string, number>([
+		["0", 0],
+		["1", 1],
+		["2", 2],
+		["3", 3],
+		["4", 4],
+		["5", 5],
+		["6", 6],
+		["7", 7],
+		["8", 8],
+		["9", 9],
+		["A", 10],
+		["B", 11],
+		["C", 12],
+		["D", 13],
+		["E", 14],
+		["F", 15],
+	]);
+
+	private numHexMap = new Map<number, string>([
+		[0, "0"],
+		[1, "1"],
+		[2, "2"],
+		[3, "3"],
+		[4, "4"],
+		[5, "5"],
+		[6, "6"],
+		[7, "7"],
+		[8, "8"],
+		[9, "9"],
+		[10, "A"],
+		[11, "B"],
+		[12, "C"],
+		[13, "D"],
+		[14, "E"],
+		[15, "F"],
+	]);
 
 	binaryToNumber(src:string): string {
-		/*
-		var buffer = "";
-		var numOfChars = src.length / 8;
-		for(let i = numOfChars; i > 0; i--)
-	  {
-			var char = "";
-			for(let e = 8; e > 0; e--)
-	    {
-	      char += src[i * 8 - e];
-	    }
-			buffer += String.fromCharCode(parseInt(char.split("").join(""), 2));
+		var binaryStr = src.trim();
+		var output:number = 0;
+		for(let i=binaryStr.length - 1; i >= 0; i--)
+		{
+			if(binaryStr[i] == "1")
+			{
+				output += Math.pow(2, (binaryStr.length - i - 1))
+			}
 		}
-		*/
-		return parseInt(src.split('').join(''), 2 ).toString();
+		
+		return src != "" ? String(output) : "";
 	}
 
-	stringToNumber(src:string): string {
-		/*
-		var buffer = "";
-	  for(let i = 0; i < src.length; i++)
-	  {
-	      for(let e = 0; e < 8; e++)
-	      {
-	        buffer += String((src[i].charCodeAt(0) >> e) & 1);
-	      }
-	  }
-	  return buffer.split("").reverse().join("");
-		*/
-		return Number(src).toString(2);
+	numberToBinary(src:string): string {
+		var number = Number(src.trim());
+		var output:string = "";
+
+		while(number > 0)
+		{
+			output += Math.floor(number % 2);
+			number = Math.floor(number / 2);
+		}
+		return output;
 	}
 
 	numberToHex(src:string): string {
-		var hex = Number(src).toString(16).toUpperCase();
-  	return src == "" ? "" : hex == "NAN" ? "" : hex;
+		var number = Number(src.trim());
+		var output:string = "";
+
+		while(number > 0)
+		{
+			output += this.numHexMap.get(Math.floor(number % 16));
+			number = Math.floor(number / 16);
+		}
+		return output.toUpperCase();
 	}
 
 	hexToNumber(src:string): string {
-		return src != "" ? parseInt(src, 16).toString() : "";
+		var hex = src.trim().toUpperCase();
+		var output:number = 0;
+	
+		let e = 0
+		for(let i = hex.length - 1; i >= 0; i--)
+		{
+			output += this.hexNumMap.get(hex[i]) * Math.pow(16,e);
+			e++;
+		}
+		return src != "" ? String(output) : "";;
 	}
 
 	hexToBinary(src:string): string{
-		return this.stringToNumber(this.hexToNumber(src));
+		return this.numberToBinary(this.hexToNumber(src));
 	}
 
 	binaryToHex(src:string): string{
